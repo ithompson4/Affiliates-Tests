@@ -1,0 +1,227 @@
+Microsoft Windows [Version 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+
+C:\Users\Iryna>mkvirtualenv affiliates
+New python executable in affiliates\Scripts\python.exe
+Installing setuptools, pip, wheel...done.
+
+(affiliates) C:\Users\Iryna>setprojectdir C:\Users\Iryna\Documents\GitHub\Af
+filiates-Tests
+
+    "C:\Users\Iryna\Documents\GitHub\Affiliates-Tests" is now the project dire
+ctory for
+    virtualenv "C:\Users\Iryna\affiliates"
+
+    "C:\Users\Iryna\Documents\GitHub\Affiliates-Tests" added to
+    C:\Users\Iryna\affiliates\Lib\site-packages\virtualenv_path_extensions.pth
+
+
+(affiliates) C:\Users\Iryna>cdproject C:\Users\Iryna\Documents\GitHub\Affili
+ates-Tests
+(affiliates) C:\Users\Iryna\Documents\GitHub\Affiliates-Tests>pip install -Ur
+requirements.txt
+Collecting pytest==2.7.3 (from -r requirements.txt (line 1))
+  Using cached pytest-2.7.3-py2.py3-none-any.whl
+Collecting pytest-selenium (from -r requirements.txt (line 2))
+  Using cached pytest_selenium-1.1-py2-none-any.whl
+Collecting pytest-variables (from -r requirements.txt (line 3))
+  Using cached pytest_variables-1.3-py2-none-any.whl
+Collecting browserid (from -r requirements.txt (line 4))
+  Using cached browserid-1.4-py2-none-any.whl
+Collecting py>=1.4.29 (from pytest==2.7.3->-r requirements.txt (line 1))
+  Using cached py-1.4.31-py2.py3-none-any.whl
+Collecting colorama (from pytest==2.7.3->-r requirements.txt (line 1))
+  Using cached colorama-0.3.5-py2.py3-none-any.whl
+Collecting pytest-html>=1.7 (from pytest-selenium->-r requirements.txt (line 2))
+
+  Using cached pytest_html-1.7-py2.py3-none-any.whl
+Collecting requests (from pytest-selenium->-r requirements.txt (line 2))
+  Using cached requests-2.9.1-py2.py3-none-any.whl
+Collecting selenium>=2.26.0 (from pytest-selenium->-r requirements.txt (line 2))
+
+  Using cached selenium-2.48.0-py2-none-any.whl
+Installing collected packages: py, colorama, pytest, pytest-html, pytest-variabl
+es, requests, selenium, pytest-selenium, browserid
+Successfully installed browserid-1.4 colorama-0.3.5 py-1.4.31 pytest-2.7.3 pytes
+t-html-1.7 pytest-selenium-1.1 pytest-variables-1.3 requests-2.9.1 selenium-2.48
+.0
+
+(affiliates) C:\Users\Iryna\Documents\GitHub\Affiliates-Tests>py.test --driver
+=Firefox
+============================= test session starts =============================
+platform win32 -- Python 2.7.11 -- py-1.4.31 -- pytest-2.7.3
+rootdir: C:\Users\Iryna\Documents\GitHub\Affiliates-Tests, inifile: setup.cfg
+plugins: html, selenium, selenium, variables
+collected 7 items
+
+tests\test_about_page.py E
+tests\test_profile.py ssss
+tests\test_start_page.py EE
+
+=================================== ERRORS ====================================
+______ ERROR at setup of TestAboutPage.test_about_page_has_proper_layout ______
+
+request = <SubRequest 'selenium' for <Function 'test_about_page_has_proper_layou
+t'>>
+capabilities = {'tags': ['affiliates']}
+
+    @pytest.fixture
+    def selenium(request, capabilities):
+        """Returns a WebDriver instance based on options and capabilities"""
+        from .driver import start_driver
+>       driver = start_driver(request.node, capabilities)
+
+..\..\..\affiliates\lib\site-packages\pytest_selenium\pytest_selenium.py:75:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\..\affiliates\lib\site-packages\pytest_selenium\driver.py:26: in start_dri
+ver
+    options.driver.lower()))(item, _capabilities)
+..\..\..\affiliates\lib\site-packages\pytest_selenium\driver.py:66: in firefox_d
+river
+    return webdriver.Firefox(**kwargs)
+..\..\..\affiliates\lib\site-packages\selenium\webdriver\firefox\webdriver.py:77
+: in __init__
+    self.binary, timeout),
+..\..\..\affiliates\lib\site-packages\selenium\webdriver\firefox\extension_conne
+ction.py:49: in __init__
+    self.binary.launch_browser(self.profile)
+..\..\..\affiliates\lib\site-packages\selenium\webdriver\firefox\firefox_binary.
+py:68: in launch_browser
+    self._wait_until_connectable()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <selenium.webdriver.firefox.firefox_binary.FirefoxBinary object at 0x031E
+5A90>
+
+    def _wait_until_connectable(self):
+        """Blocks until the extension is connectable in the firefox."""
+        count = 0
+        while not utils.is_connectable(self.profile.port):
+            if self.process.poll() is not None:
+                # Browser has exited
+                raise WebDriverException("The browser appears to have exited "
+                      "before we could connect. If you specified a log_file in "
+
+                      "the FirefoxBinary constructor, check it for details.")
+            if count == 30:
+                self.kill()
+>               raise WebDriverException("Can't load the profile. Profile "
+                      "Dir: %s If you specified a log_file in the "
+                      "FirefoxBinary constructor, check it for details.")
+E               WebDriverException: Message: Can't load the profile. Profile Dir
+: %s If you specified a log_file in the FirefoxBinary constructor, check it for
+details.
+
+..\..\..\affiliates\lib\site-packages\selenium\webdriver\firefox\firefox_binary.
+py:103: WebDriverException
+______ ERROR at setup of TestStartPage.test_start_page_has_proper_titles ______
+
+request = <SubRequest 'selenium' for <Function 'test_start_page_has_proper_title
+s'>>
+capabilities = {'tags': ['affiliates']}
+
+    @pytest.fixture
+    def selenium(request, capabilities):
+        """Returns a WebDriver instance based on options and capabilities"""
+        from .driver import start_driver
+>       driver = start_driver(request.node, capabilities)
+
+..\..\..\affiliates\lib\site-packages\pytest_selenium\pytest_selenium.py:75:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\..\affiliates\lib\site-packages\pytest_selenium\driver.py:26: in start_dri
+ver
+    options.driver.lower()))(item, _capabilities)
+..\..\..\affiliates\lib\site-packages\pytest_selenium\driver.py:66: in firefox_d
+river
+    return webdriver.Firefox(**kwargs)
+..\..\..\affiliates\lib\site-packages\selenium\webdriver\firefox\webdriver.py:77
+: in __init__
+    self.binary, timeout),
+..\..\..\affiliates\lib\site-packages\selenium\webdriver\firefox\extension_conne
+ction.py:49: in __init__
+    self.binary.launch_browser(self.profile)
+..\..\..\affiliates\lib\site-packages\selenium\webdriver\firefox\firefox_binary.
+py:68: in launch_browser
+    self._wait_until_connectable()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <selenium.webdriver.firefox.firefox_binary.FirefoxBinary object at 0x0320
+5F70>
+
+    def _wait_until_connectable(self):
+        """Blocks until the extension is connectable in the firefox."""
+        count = 0
+        while not utils.is_connectable(self.profile.port):
+            if self.process.poll() is not None:
+                # Browser has exited
+                raise WebDriverException("The browser appears to have exited "
+                      "before we could connect. If you specified a log_file in "
+
+                      "the FirefoxBinary constructor, check it for details.")
+            if count == 30:
+                self.kill()
+>               raise WebDriverException("Can't load the profile. Profile "
+                      "Dir: %s If you specified a log_file in the "
+                      "FirefoxBinary constructor, check it for details.")
+E               WebDriverException: Message: Can't load the profile. Profile Dir
+: %s If you specified a log_file in the FirefoxBinary constructor, check it for
+details.
+
+..\..\..\affiliates\lib\site-packages\selenium\webdriver\firefox\firefox_binary.
+py:103: WebDriverException
+______ ERROR at setup of TestStartPage.test_login_logout_works_properly _______
+
+request = <SubRequest 'selenium' for <Function 'test_login_logout_works_properly
+'>>
+capabilities = {'tags': ['affiliates']}
+
+    @pytest.fixture
+    def selenium(request, capabilities):
+        """Returns a WebDriver instance based on options and capabilities"""
+        from .driver import start_driver
+>       driver = start_driver(request.node, capabilities)
+
+..\..\..\affiliates\lib\site-packages\pytest_selenium\pytest_selenium.py:75:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\..\affiliates\lib\site-packages\pytest_selenium\driver.py:26: in start_dri
+ver
+    options.driver.lower()))(item, _capabilities)
+..\..\..\affiliates\lib\site-packages\pytest_selenium\driver.py:66: in firefox_d
+river
+    return webdriver.Firefox(**kwargs)
+..\..\..\affiliates\lib\site-packages\selenium\webdriver\firefox\webdriver.py:77
+: in __init__
+    self.binary, timeout),
+..\..\..\affiliates\lib\site-packages\selenium\webdriver\firefox\extension_conne
+ction.py:49: in __init__
+    self.binary.launch_browser(self.profile)
+..\..\..\affiliates\lib\site-packages\selenium\webdriver\firefox\firefox_binary.
+py:68: in launch_browser
+    self._wait_until_connectable()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <selenium.webdriver.firefox.firefox_binary.FirefoxBinary object at 0x0325
+7150>
+
+    def _wait_until_connectable(self):
+        """Blocks until the extension is connectable in the firefox."""
+        count = 0
+        while not utils.is_connectable(self.profile.port):
+            if self.process.poll() is not None:
+                # Browser has exited
+                raise WebDriverException("The browser appears to have exited "
+                      "before we could connect. If you specified a log_file in "
+
+                      "the FirefoxBinary constructor, check it for details.")
+            if count == 30:
+                self.kill()
+>               raise WebDriverException("Can't load the profile. Profile "
+                      "Dir: %s If you specified a log_file in the "
+                      "FirefoxBinary constructor, check it for details.")
+E               WebDriverException: Message: Can't load the profile. Profile Dir
+: %s If you specified a log_file in the FirefoxBinary constructor, check it for
+details.
+
+..\..\..\affiliates\lib\site-packages\selenium\webdriver\firefox\firefox_binary.
+py:103: WebDriverException
+==================== 4 skipped, 3 error in 185.19 seconds =====================
